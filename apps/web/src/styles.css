@@ -141,6 +141,190 @@
   --brand-label: oklch(0.7187 0.1122 39.57); /* #e08b6e */
 }
 
+/* Named themes (apps/web/src/lib/themes.ts). Colours only. Each sits on the
+   .light or .dark base class, and :root[data-theme] outranks both. Pairs are
+   checked to WCAG AA (4.5:1). */
+/* Santa Fe: half red, half white (light base). White page, red header and
+   footer bands, red-topped cards, red buttons. */
+:root[data-theme="santafe"] {
+  --background: #ffffff;
+  --foreground: #1c1414;
+  --card: #ffffff;
+  --card-foreground: #1c1414;
+  --popover: #ffffff;
+  --popover-foreground: #1c1414;
+  --primary: #c8102e;
+  --primary-foreground: #ffffff;
+  --secondary: #fbeaea;
+  --secondary-foreground: #1c1414;
+  --muted: #fbeaea;
+  --muted-foreground: #6b4f4f;
+  --accent: #fbeaea;
+  --accent-foreground: #1c1414;
+  --destructive: #8f1d14;
+  --border: #ecc3c9;
+  --input: #ecc3c9;
+  --ring: #c8102e;
+  --chart-1: #c8102e;
+  --chart-2: #1c1414;
+  --chart-3: #6b4f4f;
+  --chart-4: #e88a97;
+  --chart-5: #ecc3c9;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1c1414;
+  --sidebar-primary: #c8102e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fbeaea;
+  --sidebar-accent-foreground: #1c1414;
+  --sidebar-border: #ecc3c9;
+  --sidebar-ring: #c8102e;
+  --brand-label: #a50d26;
+}
+
+/* Café: espresso, crema and caramel (dark base). */
+:root[data-theme="cafe"] {
+  --background: #2b1d14;
+  --foreground: #f3e9dc;
+  --card: #362519;
+  --card-foreground: #f3e9dc;
+  --popover: #362519;
+  --popover-foreground: #f3e9dc;
+  --primary: #c8915a;
+  --primary-foreground: #2b1d14;
+  --secondary: #3f2c1f;
+  --secondary-foreground: #f3e9dc;
+  --muted: #3f2c1f;
+  --muted-foreground: #c4ad94;
+  --accent: #3f2c1f;
+  --accent-foreground: #f3e9dc;
+  --destructive: #f08a7a;
+  --border: #4d3727;
+  --input: #4d3727;
+  --ring: #c8915a;
+  --chart-1: #c8915a;
+  --chart-2: #f3e9dc;
+  --chart-3: #c4ad94;
+  --chart-4: #8a6a4f;
+  --chart-5: #4d3727;
+  --sidebar: #2b1d14;
+  --sidebar-foreground: #f3e9dc;
+  --sidebar-primary: #c8915a;
+  --sidebar-primary-foreground: #2b1d14;
+  --sidebar-accent: #3f2c1f;
+  --sidebar-accent-foreground: #f3e9dc;
+  --sidebar-border: #4d3727;
+  --sidebar-ring: #c8915a;
+  --brand-label: #d9a877;
+}
+
+/* Caribe: sand, turquoise sea and coral (light base). */
+:root[data-theme="caribe"] {
+  --background: #f7efe0;
+  --foreground: #1d2a30;
+  --card: #fffaf1;
+  --card-foreground: #1d2a30;
+  --popover: #fffaf1;
+  --popover-foreground: #1d2a30;
+  --primary: #f07a5f;
+  --primary-foreground: #1d2a30;
+  --secondary: #d9f1ee;
+  --secondary-foreground: #1d2a30;
+  --muted: #d9f1ee;
+  --muted-foreground: #4f5a5c;
+  --accent: #d9f1ee;
+  --accent-foreground: #1d2a30;
+  --destructive: #a8231b;
+  --border: #e5d9c3;
+  --input: #e5d9c3;
+  --ring: #0f8f8a;
+  --chart-1: #f07a5f;
+  --chart-2: #0f8f8a;
+  --chart-3: #1d2a30;
+  --chart-4: #7fd3cc;
+  --chart-5: #e5d9c3;
+  --sidebar: #f7efe0;
+  --sidebar-foreground: #1d2a30;
+  --sidebar-primary: #f07a5f;
+  --sidebar-primary-foreground: #1d2a30;
+  --sidebar-accent: #d9f1ee;
+  --sidebar-accent-foreground: #1d2a30;
+  --sidebar-border: #e5d9c3;
+  --sidebar-ring: #0f8f8a;
+  --brand-label: #0b6e6a;
+}
+
+/* Páramo: misty grey-green, sage and frailejón yellow (light base). */
+:root[data-theme="paramo"] {
+  --background: #eef1ec;
+  --foreground: #22291f;
+  --card: #f8faf6;
+  --card-foreground: #22291f;
+  --popover: #f8faf6;
+  --popover-foreground: #22291f;
+  --primary: #4f6f45;
+  --primary-foreground: #ffffff;
+  --secondary: #f3ecc4;
+  --secondary-foreground: #22291f;
+  --muted: #f3ecc4;
+  --muted-foreground: #525c4c;
+  --accent: #f3ecc4;
+  --accent-foreground: #22291f;
+  --destructive: #a63a2c;
+  --border: #d3dacd;
+  --input: #d3dacd;
+  --ring: #4f6f45;
+  --chart-1: #4f6f45;
+  --chart-2: #c9b458;
+  --chart-3: #22291f;
+  --chart-4: #8fa982;
+  --chart-5: #d3dacd;
+  --sidebar: #eef1ec;
+  --sidebar-foreground: #22291f;
+  --sidebar-primary: #4f6f45;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3ecc4;
+  --sidebar-accent-foreground: #22291f;
+  --sidebar-border: #d3dacd;
+  --sidebar-ring: #4f6f45;
+  --brand-label: #46633d;
+}
+
+/* Esmeralda: deep emerald and gold (dark base). */
+:root[data-theme="esmeralda"] {
+  --background: #0b2a20;
+  --foreground: #eef5ef;
+  --card: #10362a;
+  --card-foreground: #eef5ef;
+  --popover: #10362a;
+  --popover-foreground: #eef5ef;
+  --primary: #d4af37;
+  --primary-foreground: #0b2a20;
+  --secondary: #164233;
+  --secondary-foreground: #eef5ef;
+  --muted: #164233;
+  --muted-foreground: #a9c4b6;
+  --accent: #164233;
+  --accent-foreground: #eef5ef;
+  --destructive: #f08a7a;
+  --border: #1f4d3d;
+  --input: #1f4d3d;
+  --ring: #d4af37;
+  --chart-1: #d4af37;
+  --chart-2: #eef5ef;
+  --chart-3: #a9c4b6;
+  --chart-4: #2f8a68;
+  --chart-5: #1f4d3d;
+  --sidebar: #0b2a20;
+  --sidebar-foreground: #eef5ef;
+  --sidebar-primary: #d4af37;
+  --sidebar-primary-foreground: #0b2a20;
+  --sidebar-accent: #164233;
+  --sidebar-accent-foreground: #eef5ef;
+  --sidebar-border: #1f4d3d;
+  --sidebar-ring: #d4af37;
+  --brand-label: #e3c565;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -262,4 +446,43 @@ body {
   .rise-in {
     animation: none;
   }
+}
+
+/* Santa Fe extras. Kept last: they override the general rules above. */
+/* The header and footer re-declare the palette as white on red, so everything
+   inside them (links, the theme button) follows without extra classes. */
+:root[data-theme="santafe"] header,
+:root[data-theme="santafe"] .site-footer {
+  --background: #a50d26;
+  --foreground: #ffffff;
+  --muted: #b8233a;
+  --muted-foreground: #fbd9de;
+  --accent: #b8233a;
+  --accent-foreground: #ffffff;
+  --border: #c9505f;
+  --input: #c9505f;
+  --ring: #ffffff;
+  --primary: #ffffff;
+  --brand-label: #ffffff;
+  --brand-terracotta: #ffffff;
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+:root[data-theme="santafe"] .island-shell {
+  border-top: 6px solid var(--primary);
+}
+
+/* Header name: "Teamdesk", or the Santa Fe name while that theme is on. CSS,
+   not React state, so the server render is right and nothing flashes. */
+.brand-santafe {
+  display: none;
+}
+
+:root[data-theme="santafe"] .brand-santafe {
+  display: inline;
+}
+
+:root[data-theme="santafe"] .brand-default {
+  display: none;
 }

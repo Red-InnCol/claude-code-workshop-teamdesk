@@ -1,111 +1,101 @@
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Palette } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "#/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "#/components/ui/dropdown-menu";
+import {
+  applyTheme,
+  DEFAULT_THEME,
+  isThemeValue,
+  THEME_STORAGE_KEY,
+  THEMES,
+  type ThemeValue,
+} from "#/lib/themes";
 
-type ThemeMode = "light" | "dark" | "auto";
-
-const NEXT_MODE: Record<ThemeMode, ThemeMode> = {
-  auto: "light",
-  dark: "auto",
-  light: "dark",
-};
-
-const MODE_LABEL: Record<ThemeMode, string> = {
-  auto: "Auto",
-  dark: "Dark",
-  light: "Light",
-};
-
-const MODE_ICON = {
-  auto: Monitor,
-  dark: Moon,
-  light: Sun,
-} as const;
-
-function resolveTheme(mode: ThemeMode, prefersDark: boolean): "light" | "dark" {
-  if (mode === "auto") {
-    return prefersDark ? "dark" : "light";
+function readStoredTheme(): ThemeValue {
+  try {
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+    return isThemeValue(stored) ? stored : DEFAULT_THEME;
+  } catch {
+    // Storage can be blocked (private windows). Fall back to the default.
+    return DEFAULT_THEME;
   }
-  return mode;
-}
-
-function getInitialMode(): ThemeMode {
-  if (typeof window === "undefined") {
-    return "auto";
-  }
-
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark" || stored === "auto") {
-    return stored;
-  }
-
-  return "auto";
-}
-
-function applyThemeMode(mode: ThemeMode) {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const resolved = resolveTheme(mode, prefersDark);
-
-  document.documentElement.classList.remove("light", "dark");
-  document.documentElement.classList.add(resolved);
-
-  if (mode === "auto") {
-    document.documentElement.removeAttribute("data-theme");
-  } else {
-    document.documentElement.setAttribute("data-theme", mode);
-  }
-
-  document.documentElement.style.colorScheme = resolved;
 }
 
 export default function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>("auto");
+  const [theme, setTheme] = useState<ThemeValue>(DEFAULT_THEME);
 
   useEffect(() => {
-    const initialMode = getInitialMode();
-    setMode(initialMode);
-    applyThemeMode(initialMode);
+    const initial = readStoredTheme();
+    setTheme(initial);
+    applyTheme(initial);
   }, []);
 
   useEffect(() => {
-    if (mode !== "auto") {
+    if (theme !== "auto") {
       return;
     }
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => applyThemeMode("auto");
+    const onChange = () => applyTheme("auto");
 
     media.addEventListener("change", onChange);
     return () => {
       media.removeEventListener("change", onChange);
     };
-  }, [mode]);
+  }, [theme]);
 
-  function toggleMode() {
-    const nextMode = NEXT_MODE[mode];
-    setMode(nextMode);
-    applyThemeMode(nextMode);
-    window.localStorage.setItem("theme", nextMode);
+  function selectTheme(value: string) {
+    if (!isThemeValue(value)) {
+      return;
+    }
+    setTheme(value);
+    applyTheme(value);
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, value);
+    } catch {
+      // Not saved; the theme still applies for this visit.
+    }
   }
 
-  const label =
-    mode === "auto"
-      ? "Theme mode: auto (system). Click to switch to light mode."
-      : `Theme mode: ${mode}. Click to switch mode.`;
-
-  const ModeIcon = MODE_ICON[mode];
+  const current = THEMES.find((option) => option.value === theme) ?? THEMES[0];
+  const label = `Theme: ${current.label}. Choose a theme.`;
 
   return (
-    <Button
-      aria-label={label}
-      onClick={toggleMode}
-      size="sm"
-      title={label}
-      type="button"
-      variant="outline"
-    >
-      <ModeIcon />
-      {MODE_LABEL[mode]}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          aria-label={label}
+          size="sm"
+          title={label}
+          type="button"
+          variant="outline"
+        >
+          <Palette />
+          {current.label}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-44">
+        <DropdownMenuLabel>Theme</DropdownMenuLabel>
+        <DropdownMenuRadioGroup onValueChange={selectTheme} value={theme}>
+          {THEMES.map((option) => (
+            <DropdownMenuRadioItem key={option.value} value={option.value}>
+              <span
+                aria-hidden="true"
+                className="size-3 shrink-0 rounded-full ring-1 ring-foreground/20"
+                style={{ backgroundColor: option.dot }}
+              />
+              {option.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
