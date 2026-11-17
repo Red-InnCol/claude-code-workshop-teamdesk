@@ -10,7 +10,7 @@
       "binding": "DB",
       "database_name": "teamdesk",
       // Filled in by `wrangler d1 create`. Local development ignores the value.
-      "database_id": "local",
+      "database_id": "b152b3b7-5f6e-4394-a0a1-76fb944a8c6b",
       "migrations_dir": "../../packages/db/migrations"
     }
   ]
